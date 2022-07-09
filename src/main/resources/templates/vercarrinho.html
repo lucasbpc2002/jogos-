@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .masthead {
+      height: 100vh;
+      min-height: 500px;
+      background-image: url('https://th.bing.com/th/id/R.78730aec45368c6545838316c79f72ff?rik=dhZttN%2bk5IK%2bqg&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fa%2f4%2f8%2f863787-download-free-abstract-gaming-wallpapers-1080p-1920x1080-free-download.jpg&ehk=KRBdd0niNs8n3Ff3v9q6bUwv8ff8ci7vr8f8DozyIHI%3d&risl=&pid=ImgRaw&r=0');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      }
+      </style>
+      </head>
+      <body class="masthead">
+        <div th:replace="fragments/cabecalho :: header"></div>
+          <table class="table bg-white ">
+            <div class="rolar p-4">
+              <div class="rolar2 p-4">
+                <div class="rolar3 p-4"></div>
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">imagemurl</th>
+                  <th scope="col">nome</th>
+                  <th scope="col">ano lançamento</th>
+                  <th scope="col">desenvolvedora</th>
+                  <th scope="col">empresa</th>
+                  <th scope="col">plataformas</th>
+                  <th scope="col">preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr th:each="j : ${jogos}" th:object="${j}">
+                      <td th:text="*{id}"></td>
+                      <td><img th:src="@{'/images/' + *{imagemurl}}" alt="..." height="100px" width="100px" /></img></td>
+                      <td th:text="*{nome}"></td>
+                      <td th:text="*{anolancamento}"></td>
+                      <td th:text="*{desenvolvedora}"></td>
+                      <td th:text="*{empresa}"></td>
+                      <td th:text="*{plataformas}"></td>
+                      <td th:text="*{preco}"></td>
+                  </tr>
+              </tbody>
+            </table>
+            <div class="card mb-5">
+                <div class="card-body p-4">
+                  <div class="float-end">
+                    <p class="mb-0 me-5 d-flex align-items-center">
+                      <a th:href="@{'/index'}"><button class="btn btn-outline-light bg-primary px-5" type="adicionar">escolha mais produtos</button></a>
+                      <a href="/finalizarCompra"><button class="btn btn-outline-light bg-primary px-5" type="submit">finalizar compra</button></a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </body>
+      </html>
