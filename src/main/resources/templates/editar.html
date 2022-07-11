@@ -21,83 +21,84 @@ background-repeat: no-repeat;
 }
  </style>
  <body class="masthead">
-   <form th:object="${jogoscadastrar}" th:action="@{/salvar}" method="post" enctype="multipart/form-data">
- <section >
-        <div class="container py-5 h-100">
-          <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-              <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5"> alterar jogos</h3>
-                  <form>
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-outline">
-                          <div class="mb-3">
-                    <label for="exampleFormControlInput3" class="form-label">Imagem:</label>
-                    <input type="file" name="file" class="form-control" id="exampleFormControlInput4" placeholder="">
-                  </div>
-                    </div>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-      
-                        <div class="form-outline">
-                          <input type="text" class="form-control form-control-lg" th:field="*{nome}" />
-                          <label class="form-label" >nome</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4">
-      
-                        <div class="form-outline">
-                          <input type="text" class="form-control form-control-lg" th:field="*{desenvolvedora}" />
-                          <label class="form-label" for="lastName">desenvolvedora</label>
-                        </div>
-      
-                      </div>
-                    </div>
-      
-                    <div class="row">
-                      <div class="col-md-6 mb-4 d-flex align-items-center">
-      
-                        <div class="form-outline datepicker w-100">
-                          <input type="text" class="form-control form-control-lg" th:field="*{anolancamento}"/>
-                          <label class="form-label">ano de lançamento</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <input type="text" class="form-control form-control-lg" id="birthdayDate" th:field="*{plataformas}" />
-                        <label for="birthdayDate" class="form-label">plataformas</label>
-                      </div>
-                    </div>
-      
-                    <div class="row">
-                      <div class="col-md-6 mb-4 pb-2">
-      
-                        <div class="form-outline">
-                          <input type="text" class="form-control form-control-lg" th:field="*{empresa}"/>
-                          <label class="form-label">empresa</label>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <input type="text" class="form-control form-control-lg" id="birthdayDate" th:field="*{preco}" />
-                          <label for="birthdayDate" class="form-label">preço</label>
-                        </div>
-                      </div>
-                    </div>
-      
-                    <div class="mt-4 pt-2">
-                      <input class="btn btn-primary btn-lg" type="submit" value="salvar alteração" />
-                    </div>
-      
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-</body>
-</html>
+  <form th:object="${jogoseditar}" th:action="@{/salvar}" method="post" enctype="multipart/form-data">
+    <section >
+           <div class="container py-5 h-100">
+             <div class="row justify-content-center align-items-center h-100">
+               <div class="col-12 col-lg-9 col-xl-7">
+                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                   <div class="card-body p-4 p-md-5">
+                     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">edição de jogos</h3>
+                     <form>
+                       <div class="row">
+                         <div class="col-md-6 mb-4">
+                           <div class="form-outline">
+                             <div class="mb-3">
+                             <input type="hidden" th:field="*{id}">
+                       <label for="exampleFormControlInput3" class="form-label">Imagem:</label>
+                       <input type="file" name="file" class="form-control" id="exampleFormControlInput4" placeholder="">
+                     </div>
+                       </div>
+                       </div>
+                     </div>
+                       <div class="row">
+                         <div class="col-md-6 mb-4">
+         
+                           <div class="form-outline">
+                             <input type="text" class="form-control form-control-lg" th:field="*{nome}" />
+                             <label class="form-label" >nome</label>
+                           </div>
+         
+                         </div>
+                         <div class="col-md-6 mb-4">
+         
+                           <div class="form-outline">
+                             <input type="text" class="form-control form-control-lg" th:field="*{desenvolvedora}" />
+                             <label class="form-label" for="lastName">desenvolvedora</label>
+                           </div>
+         
+                         </div>
+                       </div>
+         
+                       <div class="row">
+                         <div class="col-md-6 mb-4 d-flex align-items-center">
+         
+                           <div class="form-outline datepicker w-100">
+                             <input type="text" class="form-control form-control-lg" th:field="*{anolancamento}"/>
+                             <label class="form-label">ano de lançamento</label>
+                           </div>
+         
+                         </div>
+                         <div class="col-md-6 mb-4">
+                           <input type="text" class="form-control form-control-lg" id="birthdayDate" th:field="*{plataformas}" />
+                           <label for="birthdayDate" class="form-label">plataformas</label>
+                         </div>
+                       </div>
+         
+                       <div class="row">
+                         <div class="col-md-6 mb-4 pb-2">
+         
+                           <div class="form-outline">
+                             <input type="text" class="form-control form-control-lg" th:field="*{empresa}"/>
+                             <label class="form-label">empresa</label>
+                           </div>
+                           <div class="col-md-6 mb-4">
+                             <input type="text" class="form-control form-control-lg" id="birthdayDate" th:field="*{preco}" />
+                             <label for="birthdayDate" class="form-label">preço</label>
+                           </div>
+                         </div>
+                       </div>
+         
+                       <div class="mt-4 pt-2">
+                         <input class="btn btn-primary btn-lg" type="submit" value="finalizar edição" />
+                       </div>
+         
+                     </form>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </section>
+   </body>
+   </html>

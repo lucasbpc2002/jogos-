@@ -4,6 +4,7 @@ import br.tads.eaj.gamesapp.domain.Jogos;
 import br.tads.eaj.gamesapp.repository.JogosInterface;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -14,19 +15,27 @@ public class JogosService {
         this.repository = repository;
     }
 
-    public Jogos cadastro(Jogos M){
-        return repository.save(M);
+    public Jogos cadastro(Jogos j){
+        return repository.save(j);
     }
 
-    public Jogos alterar(Jogos M){
-        return repository.saveAndFlush(M);
+    public Jogos alterar(Jogos j){
+        return repository.saveAndFlush(j);
     }
-    public void excluir(Integer id){
-        this.repository.deleteById(id);
-    }
-
     public List <Jogos> Listall(){
-        return repository.findAll();
+        List<Jogos> lista_jogos = new ArrayList();
+        List<Jogos> nova_lista_jogos = new ArrayList();
+
+        lista_jogos = repository.findAll();
+        var i = 0;
+
+        for (i = 0; i <lista_jogos.size(); i++) {
+            if( lista_jogos.get(i).getDeleted() == null){
+                nova_lista_jogos.add( lista_jogos.get(i));
+            }
+        }
+
+        return nova_lista_jogos;
     }
     public Jogos findById(Integer id){
         Optional<Jogos> jogos = repository.findById(id);

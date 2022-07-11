@@ -21,17 +21,6 @@ public class GamesAppApplication implements WebMvcConfigurer {
 	public static void main(String[] args) {
 		SpringApplication.run(GamesAppApplication.class, args);
 	}
-	@PostConstruct
-	public void initFilmes() {
-
-		List<Jogos> jogos = Stream.of(
-				new Jogos(1, "god of war", "Santa monica", "Sony", "2018", "playstation", "50.50", "img.png" )
-
-		).collect(Collectors.toList());
-
-		repository.saveAll(jogos);
-
-		}
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// Register resource handler for images

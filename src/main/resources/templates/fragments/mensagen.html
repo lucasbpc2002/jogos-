@@ -1,0 +1,19 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<div th:fragment="mensagem" class="mensagem">
+    <div th:if="${#request.getParameter('msgDeletar')}" class="alert alert-success" role="alert">
+      <p th:text="${#request.getParameter('msgDeletar')}"></p>
+    </div>
+  
+  <div th:if="${#request.getParameter('msgEditar')}" class="alert alert-success" role="alert">
+      <p th:text="${#request.getParameter('msgEditar')}"></p>
+  </div>
+  
+  <div th:if="${#request.getParameter('msgSalvar')}" class="alert alert-success" role="alert">
+      <p th:text="${#request.getParameter('msgSalvar')}"></p>
+  </div>
+</div>

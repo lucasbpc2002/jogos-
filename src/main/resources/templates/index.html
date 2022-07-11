@@ -48,7 +48,7 @@ background-repeat: no-repeat;
                 <td th:text="*{empresa}"></td>
                 <td th:text="*{plataformas}"></td>
                 <td th:text="*{preco}"></td>
-                <td> <a th:href="@{/addItemCarrinho/{idJogos}(idJogos=${j.id})}"><button class="btn btn-outline-light bg-primary px-5" type="adicionar">adicionar</button></a></td>
+                <td> <a th:href="@{'/addItemCarrinho/'+ *{id}}"><button class="btn btn-outline-light bg-primary px-5" type="submit">adicionar</button></a></td>
             </tr>
         </tbody>
       </table>

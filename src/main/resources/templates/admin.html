@@ -25,41 +25,43 @@
     </head>
     <body class="masthead">
       <div th:replace="fragments/cabecalho :: headeradmin"></div>
-        <table class="table bg-white ">
-          <div class="rolar p-4">
-            <div class="rolar2 p-4">
-              <div class="rolar3 p-4"></div>
-            <thead>
-              <tr>
-                <th scope="col">id</th>
-                <th scope="col">imagem</th>
-                <th scope="col">nome</th>
-                <th scope="col">ano lançamento</th>
-                <th scope="col">desenvolvedora</th>
-                <th scope="col">empresa</th>
-                <th scope="col">plataformas</th>
-                <th scope="col">preço</th>
+      <table  th:fragment="listaAdmin"class="table bg-white ">
+        <div class="rolar p-4">
+          <div class="rolar2 p-4">
+            <div class="rolar3 p-4"></div>
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">imagem</th>
+              <th scope="col">nome</th>
+              <th scope="col">ano lançamento</th>
+              <th scope="col">desenvolvedora</th>
+              <th scope="col">empresa</th>
+              <th scope="col">plataformas</th>
+              <th scope="col">preço</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr th:each="j : ${jogos}" th:object="${j}">
+                  <td th:text="*{id}"></td>
+                  <td><img th:src="@{'/images/' + *{imagemurl}}" alt="..." height="100px" width="100px" /></img></td>
+                  <td th:text="*{nome}"></td>
+                  <td th:text="*{anolancamento}"></td>
+                  <td th:text="*{desenvolvedora}"></td>
+                  <td th:text="*{empresa}"></td>
+                  <td th:text="*{plataformas}"></td>
+                  <td th:text="*{preco}"></td>
+                  <td><a th:href="@{'/editar/'+ *{id}}"><button class="btn btn-outline-light bg-primary px-5" type="submit">editar</button></a>
+                    <a th:href="@{'/deletar/'+ *{id}}"><button class="btn btn-outline-light bg-primary px-5" type="submit">deletar</button></a></td>
               </tr>
-            </thead>
-            <tbody>
-               <tr th:each="j : ${jogos}" th:object="${j}">
-                    <td th:text="*{id}"></td>
-                    <td><img th:src="@{'/images/' + *{imagemurl}}" alt="..." height="100px" width="100px" /></img></td>
-                    <td th:text="*{nome}"></td>
-                    <td th:text="*{anolancamento}"></td>
-                    <td th:text="*{desenvolvedora}"></td>
-                    <td th:text="*{empresa}"></td>
-                    <td th:text="*{plataformas}"></td>
-                    <td th:text="*{preco}"></td>
-                    <td> <button class="btn btn-outline-light bg-primary px-5" type="editar"><a th:href="@{'/editar/'+ *{id}}"></a>editar</button>
-                      <button class="btn btn-outline-light bg-primary px-5" type="deletar"><a th:href="@{'/deletar/'+ *{id}}"></a>deletar</button></td>
-                </tr>
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
-    <footer th:replace="fragments/rodape :: footer"></footer>
+    </div>
+    <div th:replace="fragments/mensagen :: mensagem"></div>
+    <footer th:replace="fragments/rodape :: footeradmin"></footer>
+
     </body>
     </html>
 

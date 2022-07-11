@@ -7,17 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
 
 @Controller
 public class JogosController {
@@ -43,7 +43,7 @@ public class JogosController {
         return "admin";
     }
 
-    @GetMapping("/cadastrarjogo")
+    @GetMapping("/cadastrarJogo")
     public String getJogosCadastro(Model model) {
         Jogos j = new Jogos();
         model.addAttribute("jogoscadastrar", j);
@@ -51,18 +51,17 @@ public class JogosController {
     }
 
     @PostMapping("/salvar")
-    public String doSalvaJogo(@ModelAttribute Jogos j, @RequestParam("file") MultipartFile file) {
+    public String doSalvaJogo(@ModelAttribute Jogos j, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         j.setImagemurl(file.getOriginalFilename());
         service.alterar(j);
         fileStorageService.save(file);
-        return "admin";
+        redirectAttributes.addAttribute("msgSalvar", "Jogo salvo com sucesso");
+        return "redirect:/admin";
     }
-
-    @GetMapping("/addItemCarrinho")
-    public void doAdicionarItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        var idJogo = 1;
-        var jogo = service.findById(idJogo);
-        Cookie carrinhoCompras = new Cookie("carrinhoCompras", "");
+    @GetMapping("/addItemCarrinho/{id}")
+    public String doAdicionarItem( @PathVariable Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        var jogo = service.findById(id);
+        Cookie carrinhoCompras = new Cookie("carrinhoCompras1", "");
         carrinhoCompras.setMaxAge(60 * 60 * 24);
         Cookie[] requestCookies = request.getCookies();
         boolean achouCarrinho = false;
@@ -86,10 +85,11 @@ public class JogosController {
             response.addCookie(carrinhoCompras);
         }
         response.addCookie(carrinhoCompras);
+        return "redirect:/index";
     }
     @GetMapping("/visualizarCarrinho")
     public String visualizarCarrinho(HttpServletRequest request, Model model) throws ServletException, IOException {
-        Cookie carrinhoCompras = new Cookie("carrinhoCompras", "");
+        Cookie carrinhoCompras = new Cookie("carrinhoCompras1", "");
         Cookie[] requestCookies = request.getCookies();
         boolean achouCarrinho = false;
         if (requestCookies != null) {
@@ -117,8 +117,23 @@ public class JogosController {
     }
     @GetMapping("/finalizarCompra")
     public String finalizarCompra(HttpServletRequest request, HttpServletResponse response){
-        Cookie carrinhoCompras = new Cookie("carrinhoCompras", "");
+        Cookie carrinhoCompras = new Cookie("carrinhoCompras1", "");
         response.addCookie(carrinhoCompras);
         return "redirect:/index";
+    }
+    @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+    public String editarJogos(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes){
+        Jogos jogos = service.findById(id);
+        model.addAttribute("jogoseditar", jogos);
+        redirectAttributes.addAttribute("msgEditar", "Jogo editado com sucesso");
+        return "editar";
+    }
+    @RequestMapping(value = "/deletar/{id}", method = RequestMethod.GET)
+    public String deletarJogos(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        Jogos jogos = service.findById(id);
+        jogos.setDeleted(new Date(System.currentTimeMillis()));
+        service.alterar(jogos);
+        redirectAttributes.addAttribute("msgDeletar", "Jogo deletado com sucesso");
+        return "redirect:/admin";
     }
 }
